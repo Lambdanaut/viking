@@ -14,7 +14,7 @@ public:
 	void Start();
 	void Update();
 
-	inline u32 msDeltaTime() const
+	u32 msDeltaTime() const
 	{
 		return deltaTime;
 	}

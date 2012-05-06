@@ -2,6 +2,7 @@
 #define GAMEOBJECT_H_INCLUDED
 
 #include "viktypes.h"
+#include "vikstring.h"
 
 namespace vik
 {
@@ -11,10 +12,8 @@ class Event;
 class GameObject
 {
 public:
-	virtual ~GameObject();
-
-	virtual void Update(u32 dt);
-	virtual bool OnEvent(Event& e);
+	virtual void Update(u32 dt){}
+	virtual void OnEvent(Event& e){}
 };
 
 } // end namespace vik

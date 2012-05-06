@@ -3,13 +3,16 @@
 
 #include "viktypes.h"
 
+#include <vector>
+
 namespace vik
 {
 
 class VikingRoot;
+class GameObject;
 
 /*
-Allocates GOs.
+Allocates GOs (Game Objects).
 Updates GO states.
 Distributes events to GOs.
 Fulfills general GO queries.
@@ -17,10 +20,9 @@ Fulfills general GO queries.
 class GameObjectEngine
 {
 public:
-	GameObjectEngine(VikingRoot& root);
 	void Update(u32 dt);
 private:
-	VikingRoot& root;
+	std::vector<GameObject*> children;
 };
 
 }

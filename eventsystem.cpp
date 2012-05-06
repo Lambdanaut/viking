@@ -1,15 +1,10 @@
 #include "eventsystem.h"
 #include "vikingroot.h"
 
-#include <SDL/SDL.h>
+#include "sdlinclude.h"
 
 namespace vik
 {
-
-EventSystem::EventSystem(VikingRoot& root):
-root(root)
-{
-}
 
 void EventSystem::DispatchEvents()
 {
@@ -20,7 +15,7 @@ void EventSystem::DispatchEvents()
 		switch(e.type)
 		{
 			case SDL_QUIT:
-			root.EndLoop();
+			VikingRoot::Get().EndLoop();
 			return;
 			default:
 			break;

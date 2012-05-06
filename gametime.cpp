@@ -1,6 +1,6 @@
 #include "gametime.h"
 
-#include <SDL/SDL.h>
+#include "sdlinclude.h"
 
 namespace vik
 {

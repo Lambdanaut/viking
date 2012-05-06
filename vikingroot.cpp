@@ -4,10 +4,14 @@ namespace vik
 {
 
 VikingRoot::VikingRoot():
-running(false),
-objectEngine(*this),
-eventSystem(*this)
+running(false)
 {
+}
+
+VikingRoot& VikingRoot::Get()
+{
+    static VikingRoot singleton;
+    return singleton;
 }
 
 void VikingRoot::MainLoop()
@@ -16,16 +20,23 @@ void VikingRoot::MainLoop()
 
 	gameTime.Start();
 
-	while(true)
+	while(running)
 	{
 		gameTime.Update();
 		u32 dt = gameTime.msDeltaTime();
 
-		objectEngine.Update(dt);
+		gameObjectEngine.Update(dt);
 
 		eventSystem.DispatchEvents();
-		// check if received event which ended the main loop
-		if(!running) break;
+
+		renderingEngine.Render();
+
+        // TODO: Implement more sophisticated timestep
+        // otherwise the physics engine will go bananas on us
+		if(dt < 1000/60)
+		{
+		    coreApp.sleep(1000/60 - dt);
+		}
 	}
 }
 

@@ -68,17 +68,25 @@
 		</Compiler>
 		<Unit filename="../../README" />
 		<Unit filename="../../SConstruct" />
+		<Unit filename="../../coreapp.cpp" />
+		<Unit filename="../../coreapp.h" />
 		<Unit filename="../../eventsystem.cpp" />
 		<Unit filename="../../eventsystem.h" />
-		<Unit filename="../../gameobject.cpp" />
 		<Unit filename="../../gameobject.h" />
 		<Unit filename="../../gameobjectengine.cpp" />
 		<Unit filename="../../gameobjectengine.h" />
 		<Unit filename="../../gametime.cpp" />
 		<Unit filename="../../gametime.h" />
+		<Unit filename="../../referencecounted.h" />
+		<Unit filename="../../renderingengine.cpp" />
+		<Unit filename="../../renderingengine.h" />
+		<Unit filename="../../sdlinclude.h" />
+		<Unit filename="../../vikdebug.cpp" />
+		<Unit filename="../../vikdebug.h" />
 		<Unit filename="../../viking.h" />
 		<Unit filename="../../vikingroot.cpp" />
 		<Unit filename="../../vikingroot.h" />
+		<Unit filename="../../vikstring.h" />
 		<Unit filename="../../viktypes.h" />
 		<Extensions>
 			<code_completion />

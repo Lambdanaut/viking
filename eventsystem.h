@@ -9,10 +9,7 @@ class VikingRoot;
 class EventSystem
 {
 public:
-	EventSystem(VikingRoot& root);
 	void DispatchEvents();
-private:
-	VikingRoot& root;
 };
 
 } // end namespace vik
