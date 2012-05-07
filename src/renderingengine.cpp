@@ -28,6 +28,8 @@ struct RenderingEngine::RenderingEngineData
 
     SDL_Surface* screen;
     SDL_Surface* icon;
+
+
 };
 
 RenderingEngine::RenderingEngine():

@@ -14,7 +14,7 @@ CoreApp::~CoreApp()
     SDL_Quit();
 }
 
-void CoreApp::sleep(u32 ms)
+void CoreApp::Sleep(u32 ms)
 {
     SDL_Delay(ms);
 }

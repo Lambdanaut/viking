@@ -35,7 +35,7 @@ void VikingRoot::MainLoop()
         // otherwise the physics engine will go bananas on us
 		if(dt < 1000/60)
 		{
-		    coreApp.sleep(1000/60 - dt);
+		    coreApp.Sleep(1000/60 - dt);
 		}
 	}
 }

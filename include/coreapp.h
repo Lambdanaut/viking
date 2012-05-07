@@ -12,7 +12,7 @@ public:
     CoreApp();
     ~CoreApp();
 
-    void sleep(u32 ms);
+    void Sleep(u32 ms);
 };
 
 } // end namespace vik

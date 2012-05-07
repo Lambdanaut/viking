@@ -10,7 +10,7 @@ namespace vik
 class ReferenceCounted
 {
     ReferenceCounted():
-    refcount(1)
+    refCount(1)
     {
     }
 
@@ -18,25 +18,25 @@ class ReferenceCounted
     {
     }
 
-    void grab() const
+    void Grab() const
     {
-        ++refcount;
+        ++refCount;
     }
 
-    void drop() const
+    void Drop() const
     {
-        if(--refcount == 0)
+        if(--refCount == 0)
         {
             delete this;
         }
     }
 
-    u32 reference_count() const
+    u32 GetReferenceCount() const
     {
-        return refcount;
+        return refCount;
     }
 private:
-    mutable u32 refcount;
+    mutable u32 refCount;
 };
 
 } // end namespace vik
