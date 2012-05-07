@@ -13,3 +13,6 @@
 
 # Scons dblite
 .sconsign.dblite
+
+# build folder
+/build
