@@ -2,7 +2,7 @@
 #define RENDERINGENGINE_H_INCLUDED
 
 #include "viktypes.h"
-#include "vikstring.h"
+#include <string>
 
 namespace vik
 {
@@ -16,7 +16,7 @@ struct WindowCreationParams
     u32 height;
     u8 bpp;
     bool fullscreen;
-    const char* icon;
+    std::string icon;
 };
 
 class RenderingEngine

@@ -4,8 +4,6 @@
 namespace vik
 {
 
-class VikingRoot;
-
 class EventSystem
 {
 public:

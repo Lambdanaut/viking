@@ -9,8 +9,7 @@ WindowCreationParams::WindowCreationParams(u32 width, u32 height, bool fullscree
 width(width),
 height(height),
 bpp(32),
-fullscreen(fullscreen),
-icon(NULL)
+fullscreen(fullscreen)
 {
 }
 
@@ -43,13 +42,13 @@ RenderingEngine::~RenderingEngine()
 
 void RenderingEngine::CreateWindow(const WindowCreationParams& params)
 {
-    if(params.icon)
+    if(!params.icon.empty())
     {
         if(data->icon)
         {
             SDL_FreeSurface(data->icon);
         }
-        data->icon = SDL_LoadBMP(params.icon);
+        data->icon = SDL_LoadBMP(params.icon.c_str());
         SDL_WM_SetIcon(data->icon, NULL);
     }
 
