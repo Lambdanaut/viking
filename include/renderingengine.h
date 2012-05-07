@@ -7,6 +7,8 @@
 namespace vik
 {
 
+class Camera2D;
+
 struct WindowCreationParams
 {
     // default constructor is for a typical 640x480 window
@@ -25,12 +27,22 @@ public:
     RenderingEngine();
     ~RenderingEngine();
 
+    // Window manipulation
     // probably setting the icon won't work if you close and recreate the window
     void CreateWindow(const WindowCreationParams& params);
     void SetWindowTitle(const char* title);
     void CloseWindow();
 
+    // General settings
+    void SetClearColor(f32 r, f32 g, f32 b);
+
+    // set the currently used camera
+    Camera2D* SetCamera2D();
+    // Camera3D* SetCamera3D();
+
+    // Rendering
     void Render();
+    void SwapBuffers();
 private:
     struct RenderingEngineData;
     RenderingEngineData* data;

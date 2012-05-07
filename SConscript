@@ -6,7 +6,7 @@ from os import path
 Import('env viking_dirs')
 
 # list of all libraries to be linked
-viking_libs = [ 'SDLmain', 'SDL', 'GL' ]
+viking_libs = [ 'SDLmain', 'SDL', 'SDL_image', 'GL', 'GLU' ]
 
 # picks up all files ending with .cpp in the root project folder
 viking_sources = glob( path.join(viking_dirs['src'], "*.cpp") )

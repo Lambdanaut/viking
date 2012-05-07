@@ -30,6 +30,7 @@ void VikingRoot::MainLoop()
 		eventSystem.DispatchEvents();
 
 		renderingEngine.Render();
+		renderingEngine.SwapBuffers();
 
         // TODO: Implement more sophisticated timestep
         // otherwise the physics engine will go bananas on us
