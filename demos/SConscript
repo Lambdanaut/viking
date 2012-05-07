@@ -1,0 +1,16 @@
+# builds all demos
+
+from os import path
+
+# directories for all demos
+# TODO: Hook up os.walk so that it finds all of these automatically
+demo_dirs = """\
+01.HelloWorld
+"""
+
+Import('viking_dirs build_configuration')
+
+for dir in demo_dirs.splitlines():
+	SConscript( path.join(viking_dirs['src'], dir,'SConscript'),
+		variant_dir=path.join(viking_dirs['build'],build_configuration),
+		duplicate=0 )
