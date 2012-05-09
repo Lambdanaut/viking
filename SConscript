@@ -1,6 +1,8 @@
 # python libraries used in this file
 from glob import glob
+import os
 from os import path
+import fnmatch
 
 # import scons environment variables
 Import('env viking_dirs')
@@ -8,9 +10,11 @@ Import('env viking_dirs')
 # list of all libraries to be linked
 viking_libs = [ 'SDLmain', 'SDL', 'SDL_image', 'GL', 'GLU' ]
 
-# picks up all files ending with .cpp in the root project folder
-viking_sources = glob( path.join(viking_dirs['src'], "*.cpp") )
-
+# picks up all files ending with .cpp in the source folders
+viking_sources = []
+for root, dirnames, filenames in os.walk('src'):
+    for filename in fnmatch.filter(filenames, '*.cpp'):
+        viking_sources.append(path.join(root,filename))
 
 # build object files
 objects = [ env.SharedObject(source = src_file,

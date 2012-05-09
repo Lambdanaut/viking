@@ -1,4 +1,4 @@
-#include "viking.h"
+#include "viking/viking.h"
 
 using namespace vik;
 
