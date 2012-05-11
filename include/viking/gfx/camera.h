@@ -2,31 +2,26 @@
 #define CAMERA_H_INCLUDED
 
 #include "viking/core/types.h"
-#include "viking/math/vector2.h"
+#include "viking/math/transformable.h"
 
 namespace vik
 {
 
-class Camera2D
+class Camera : public Transformable
 {
 public:
     // width and height of area viewed
-    Camera2D();
+    Camera();
 
     void OnPreRender();
 
+    void SetView(const Vector2f& view);
+    Vector2f& GetView();
+private:
     // width and height of area viewed
     // usually the same as the window size
-    Vector2<f32> view;
-    // top left relative to (0,0)
-    Vector2<f32> position; 
-    // scale relative to 1.0
-    Vector2<f32> scale; 
-    // degrees
-    f32 rotation; 
+    Vector2f view;
 };
-
-// TODO: class Camera3D
 
 } // end namespace vik
 

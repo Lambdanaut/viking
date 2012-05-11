@@ -34,7 +34,7 @@ struct RenderingEngine::RenderingEngineData
     SDL_Surface* screen;
     SDL_Surface* icon;
 
-    Camera2D camera2d;
+    Camera camera;
     std::map<HashedString, std::shared_ptr<Texture>> texture_map;
 };
 
@@ -96,7 +96,7 @@ void RenderingEngine::CreateWindow(const WindowCreationParams& params)
 
     // TODO: This will have to change to allow split-screen, I think.
     glViewport(0,0,params.width,params.height);
-    data->camera2d.view.set(params.width, params.height);
+    data->camera.GetView().Set(params.width, params.height);
 }
 
 void RenderingEngine::SetWindowTitle(const char* title)
@@ -115,9 +115,9 @@ void RenderingEngine::SetClearColor(f32 r, f32 g, f32 b)
     glClearColor(r,g,b,1.0f);
 }
 
-Camera2D& RenderingEngine::GetCamera2D()
+Camera& RenderingEngine::GetCamera()
 {
-    return data->camera2d;
+    return data->camera;
 }
 
 std::shared_ptr<Texture> RenderingEngine::GetTexture(const char* filename)
@@ -166,7 +166,7 @@ void RenderingEngine::Render()
 void RenderingEngine::RenderOverlay()
 {
     Enable2DRendering();
-    data->camera2d.OnPreRender();
+    data->camera.OnPreRender();
 
     glMatrixMode(GL_MODELVIEW);
    

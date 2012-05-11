@@ -8,7 +8,7 @@
 namespace vik
 {
 
-class Camera2D;
+class Camera;
 class Texture;
 
 struct WindowCreationParams
@@ -39,7 +39,7 @@ public:
     void SetClearColor(f32 r, f32 g, f32 b);
 
     // get camera to modify 2D overlay view
-    Camera2D& GetCamera2D();
+    Camera& GetCamera();
     // TODO: Camera3D* SetCamera3D();
 
     // Creates a texture and returns reference to it
