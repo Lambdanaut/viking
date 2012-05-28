@@ -5,22 +5,22 @@ from os import path
 
 # directory info
 viking_dirs = { 
-'target' : 'viking',
-'src' : 'src',
-'include' : 'include',
-'build' : 'build',
-'obj' : 'obj',
-'bin' : 'bin',
-'release' : 'Release',
-'debug' : 'Debug',
-'demos' : 'demos'
+'target': 'viking',
+'src': 'src',
+'include': 'include',
+'build': 'build',
+'obj': 'obj',
+'bin': 'bin',
+'release': 'Release',
+'debug': 'Debug',
+'demos': 'demos',
 }
 
 # compiler flags
 viking_flags = {
-'common' : [ '-std=c++0x', '-Wall' ],
-'debug' : [ '-g', '-D_DEBUG' ],
-'release' : [ '-O2', '-DNDEBUG' ],
+'common': [ '-std=c++0x', '-Wall' ],
+'debug': [ '-g', '-D_DEBUG' ],
+'release': [ '-O2', '-DNDEBUG' ],
 }
 
 # will be either viking_dirs['debug'] or viking_dirs['release'] depending on script arguments
@@ -57,12 +57,11 @@ viking_dirs['build_bin'] = path.join(viking_dirs['build'], configuration_path, v
 # export variables so other scripts can Import them
 Export('env viking_dirs build_configuration')
 
-# Builds Viking library
+# Builds Viking game
 SConscript('SConscript')
 
-# link to the created library
-env.Append(LIBPATH = path.abspath(viking_dirs['build_bin']))
-env.Append(LIBS = viking_dirs['target'])
+# env.Append(LIBPATH = path.abspath(viking_dirs['build_bin']))
+# env.Append(LIBS = viking_dirs['target'])
 
 # Builds Viking demos
-SConscript( path.join(viking_dirs['demos'], 'SConscript') )
+# SConscript( path.join(viking_dirs['demos'], 'SConscript') )
