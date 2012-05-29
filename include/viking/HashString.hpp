@@ -9,18 +9,18 @@ namespace vik
 typedef irr::u32 HashedString;
 
 // don't call this one, call HashString instead.
-constexpr HashedString _HashStringRecursive(HashedString hash, const char* str)
+constexpr HashedString _hashStringRecursive(HashedString hash, const char* str)
 {
 	return ( !*str ? hash :
-		_HashStringRecursive(((hash << 5) + hash) + *str, str + 1)); 
+		_hashStringRecursive(((hash << 5) + hash) + *str, str + 1)); 
 }
 
 // playing with clojure finally comes in handy
 // performs a compile time string hash
-constexpr HashedString HashString(const char* str)
+constexpr HashedString hashString(const char* str)
 {
 	return ( !str ? 0 :
-		_HashStringRecursive(5381, str));
+		_hashStringRecursive(5381, str));
 }
 
 } // end namespace vik
