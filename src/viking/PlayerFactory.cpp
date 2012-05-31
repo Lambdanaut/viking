@@ -17,10 +17,10 @@ GameObject* PlayerFactory::create()
 {
 	Actor* player = new Actor();
 
-	PlayerIdleState* idleState = new PlayerIdleState(hashString("Idle"), player);
+	PlayerIdleState* idleState = new PlayerIdleState(HashedString("Idle"), player);
 	player->addState(idleState);
 
-	player->startStateMachine(hashString("Idle"));
+	player->startStateMachine(HashedString("Idle"));
 
 	return player;
 }

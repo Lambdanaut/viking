@@ -19,7 +19,7 @@ public:
 
 	HashedString getTypeInfo() const
 	{
-		return hashString("IrrlichtEvent");
+		return HashedString("IrrlichtEvent");
 	}
 private:
 	const irr::SEvent& ievent;

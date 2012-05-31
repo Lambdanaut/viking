@@ -74,7 +74,7 @@ bool Actor::onEvent(const Event& e)
 
 HashedString Actor::getTypeInfo() const
 {
-	return hashString("Actor");
+	return HashedString("Actor");
 }
 
 } // end namespace vik

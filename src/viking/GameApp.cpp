@@ -26,7 +26,7 @@ GameApp::~GameApp()
 
 void GameApp::main()
 {
-	PlayerFactory pf(hashString("TestPlayerFactory"), &rootEventSource);
+	PlayerFactory pf(HashedString("TestPlayerFactory"), &rootEventSource);
 	
 	GameObject* player = pf.create();
 

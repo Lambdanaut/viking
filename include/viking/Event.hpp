@@ -17,7 +17,7 @@ public:
 	irr::u32 getTimeStamp() const;
 	HashedString getTypeInfo() const
 	{
-		return hashString("Event");
+		return HashedString("Event");
 	}
 private:
 	irr::u32 timeStamp;
