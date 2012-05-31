@@ -1,6 +1,7 @@
 #ifndef GAMEAPP_HPP_INCLUDED
 #define GAMEAPP_HPP_INCLUDED
 #include <irrlicht/irrlicht.h>
+#include "viking/EventSource.hpp"
 
 namespace vik
 {
@@ -11,37 +12,60 @@ public:
 	GameApp();
 	~GameApp();
 
-
 	void main();
 	bool OnEvent(const irr::SEvent& event);
 
-	static GameApp* getInstance()
-	{
-		return singleton;
-	}
-	static irr::IrrlichtDevice* getDevice()
-	{
-		return getInstance()->device;
-	}
-	static irr::video::IVideoDriver* getVideoDriver()
-	{
-		return getDevice()->getVideoDriver();
-	}
-	static irr::scene::ISceneManager* getSceneManager()
-	{
-		return getDevice()->getSceneManager();
-	}
-	static irr::gui::IGUIEnvironment* getGUIEnvironment()
-	{
-		return getDevice()->getGUIEnvironment();
-	}
+	static inline GameApp* getInstance();
+	static inline irr::IrrlichtDevice* getDevice();
+	static inline irr::video::IVideoDriver* getVideoDriver();
+	static inline irr::scene::ISceneManager* getSceneManager();
+	static inline irr::gui::IGUIEnvironment* getGUIEnvironment();
+	static inline irr::ILogger* getLogger();
+	static inline irr::ITimer* getTimer();
+
 private:
-	static GameApp* singleton;
+	static GameApp* instance;
 	irr::IrrlichtDevice* device;
 
-	// returns false if failed to initialize
 	void initDevice();
+
+	EventSource rootEventSource;
 };
+
+GameApp* GameApp::getInstance()
+{
+	return instance;
+}
+
+irr::IrrlichtDevice* GameApp::getDevice()
+{
+	return getInstance()->device;
+}
+
+irr::video::IVideoDriver* GameApp::getVideoDriver()
+{
+	return getDevice()->getVideoDriver();
+}
+
+irr::scene::ISceneManager* GameApp::getSceneManager()
+{
+	return getDevice()->getSceneManager();
+}
+
+irr::gui::IGUIEnvironment* GameApp::getGUIEnvironment()
+{
+	return getDevice()->getGUIEnvironment();
+}
+
+irr::ILogger* GameApp::getLogger()
+{
+	return getDevice()->getLogger();
+}
+
+irr::ITimer* GameApp::getTimer()
+{
+	return getDevice()->getTimer();
+}
 
 } // end namespace vik
 

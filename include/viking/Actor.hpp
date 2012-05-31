@@ -1,19 +1,35 @@
 #ifndef ACTOR_HPP_INCLUDED
 #define ACTOR_HPP_INCLUDED
 
-#include <irrlicht/irrlicht.h>
-#include "viking/AnimatedSprite.hpp"
+#include "viking/GameObject.hpp"
+#include "viking/ActorState.hpp"
+#include <vector>
 
 namespace vik
 {
 
-class Actor
+class Actor : public GameObject, public EventListener
 {
 public:
-	void setPosition(const irr::core::vector3df& pos);
-	irr::core::vector3df getPosition() const;
+	Actor();
+	~Actor();
+	
+	// sets the current state to the given state and enters it
+	void startStateMachine(HashedString initialStateName);
+	// Adds a state to the list of possible states.
+	void addState(ActorState* state);
+	// leaves the current state and enters the next state
+	void switchToState(HashedString nextState);
+
+	// updates the current state
+	void update(irr::f32 dt);
+
+	bool onEvent(const Event& e);
+
+	HashedString getTypeInfo() const;
 private:
-	AnimatedSprite sprite;
+	ActorState* currentState;
+	std::vector<ActorState*> states;
 };
 
 } // end namespace vik

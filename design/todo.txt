@@ -1,0 +1,13 @@
+Developer: Nicolas
+	Quests:
+	-Connect PlayerFactory with lifetime of EventListener entries
+	-Connect GameObjectFactory with lifetime of GameObjectEngine entries
+	-Implement Actor input for Player derivative
+	-Implement Actor visuals
+	
+
+Future quest ideas:
+Island survival theme
+Drop in drop out 4 player
+Ambient soundtrack
+Build character/buildings

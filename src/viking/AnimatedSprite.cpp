@@ -23,7 +23,7 @@ void AnimatedSprite::setPosition(const core::vector3df& pos)
 
 core::vector3df AnimatedSprite::getPosition() const
 {
-	reeturn node->getPosition();
+	return node->getPosition();
 }
 
 } // end namespace vik

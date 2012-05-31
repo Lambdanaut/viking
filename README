@@ -1,62 +1,23 @@
-viking
+Viking
 ======
 
-Viking game engine. Work in progress by UVic GameDev club.
-
+Codename Viking game project. Work in progress by UVic GameDev club.
 
 =================
 TODO LIST
 =================
 
-CORE:
-- More sophisticated time step
-- More sophisticated creation/destruction of VikingRoot singleton
-- Implement some system for scenes. Some GUI stuff for menus would be good too.
-RENDERING:
-- Make it possible to specify the projection mode
-- Test window creating/closing functions
-- Make it possible to draw primitives
-- Make it possible to allocate textures
-- Make it possible to render fonts
-ANIMATION:
-- Implement (eventually ideally both 2D and 3D)
-- Hook up to some tiled animation kits for 2D
-GAME OBJECTS:
-- Interface for creating factories for GameObject derivatives
-AUDIO:
-- Implement 
-PHYSICS:
-- Implement. Either custom if somebody is up to it, or hook up something decent.
-TOOLS:
-- Hook up to some level editors like Tiled or Ogmo
-- Make it possible to hook up python scripts
-
-=================
-The Design Idea
-=================
-There exists one VikingRoot singleton
-It is composed of a bunch of subsystems
-each subsystem is in charge of maintaining a certain aspect of the engine
-
-GameObjects are the main entities of the engine
-You can inherit from GameObject to create your own objects
-Then, you can compose your object by requesting components from various subsystems
-For example, an Orc class which derives from GameObject would request
-a TriangleMesh from the RenderingEngine, a collision box from the physics engine...
-
-read this for info which motivates the design: http://www.gamasutra.com/view/feature/132587/book_excerpt_game_engine_.php?print=1
+See design/todo.txt
 
 =================
 Naming Convention
 =================
 class/struct names are UpperCase
-function names are UpperCase
+primitive type names (u32, s16, etc) are lowercase
+function names are camelCase
 member variables are camelCase
-primitive types (u32, s16, etc) are lowercase
 
-filenames should begin with "vik" if it's a common name (vikdebug, vikstring, viktypes)
-header guards look like FILENAME_H_INCLUDED
-end namespace like "} // end namespace vik"
+header guards look like FILENAME_HPP_INCLUDED
 
-it's not uber important that these conventions are held as long as the style is consistent in each class.
-for example, sometimes you need to use different style to work with templates from other libraries...
+everything should be in the "vik" namespace
+close namespaces with "} // end namespace vik"
