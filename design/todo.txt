@@ -1,5 +1,6 @@
 Developer: Nicolas
 	Quests:
+	-Document lifetimes and shared ownership better
 	-Implement Actor input for Player derivative
 	-Implement Actor visuals
 	
