@@ -12,7 +12,7 @@ class PlayerIdleState : public ActorState
 public:
 	PlayerIdleState(HashedString stateName, Actor* context);
 	void onEnter();
-	void onUpdate(irr::f32 dt);
+	void onUpdate(GameTime& time);
 	void onLeave();
 };
 

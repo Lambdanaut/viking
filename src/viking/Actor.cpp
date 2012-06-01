@@ -1,10 +1,12 @@
 #include "viking/Actor.hpp"
+#include "viking/GameTime.hpp"
 #include <cassert>
 
 namespace vik
 {
 
-Actor::Actor():
+Actor::Actor(GameObjectFactory* manufacturer):
+GameObject(manufacturer),
 currentState(0)
 {
 }
@@ -62,9 +64,9 @@ void Actor::switchToState(HashedString nextState)
 	currentState->onEnter();
 }
 
-void Actor::update(irr::f32 dt)
+void Actor::update(GameTime& time)
 {
-	currentState->onUpdate(dt);
+	currentState->onUpdate(time);
 }
 
 bool Actor::onEvent(const Event& e)

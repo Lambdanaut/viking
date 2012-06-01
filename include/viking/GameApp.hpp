@@ -2,6 +2,8 @@
 #define GAMEAPP_HPP_INCLUDED
 #include <irrlicht/irrlicht.h>
 #include "viking/EventSource.hpp"
+#include "viking/GameObjectEngine.hpp"
+#include "viking/GameTime.hpp"
 
 namespace vik
 {
@@ -30,6 +32,7 @@ private:
 	void initDevice();
 
 	EventSource rootEventSource;
+	GameTime* rootTime;
 };
 
 GameApp* GameApp::getInstance()

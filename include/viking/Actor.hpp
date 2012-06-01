@@ -8,10 +8,12 @@
 namespace vik
 {
 
+class GameObjectFactory;
+
 class Actor : public GameObject, public EventListener
 {
 public:
-	Actor();
+	Actor(GameObjectFactory* manufacturer);
 	~Actor();
 	
 	// sets the current state to the given state and enters it
@@ -22,7 +24,7 @@ public:
 	void switchToState(HashedString nextState);
 
 	// updates the current state
-	void update(irr::f32 dt);
+	void update(GameTime& time);
 
 	bool onEvent(const Event& e);
 

@@ -1,8 +1,5 @@
 Developer: Nicolas
 	Quests:
-	-Make HashStrings possible to dehash in debug mode
-	-Connect PlayerFactory with lifetime of EventListener entries
-	-Connect GameObjectFactory with lifetime of GameObjectEngine entries
 	-Implement Actor input for Player derivative
 	-Implement Actor visuals
 	

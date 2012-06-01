@@ -15,7 +15,9 @@ playerEventSource(playerEventSource)
 
 GameObject* PlayerFactory::create()
 {
-	Actor* player = new Actor();
+	Actor* player = new Actor(this);
+
+	playerEventSource->addListener(player);
 
 	PlayerIdleState* idleState = new PlayerIdleState(HashedString("Idle"), player);
 	player->addState(idleState);
@@ -23,6 +25,13 @@ GameObject* PlayerFactory::create()
 	player->startStateMachine(HashedString("Idle"));
 
 	return player;
+}
+
+void PlayerFactory::destroy(GameObject* destroyMe)
+{
+	Actor* player = static_cast<Actor*>(destroyMe);
+
+	playerEventSource->removeListener(player);
 }
 
 }

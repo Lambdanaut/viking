@@ -11,7 +11,9 @@ namespace vik
 
 GameApp* GameApp::instance;
 
-GameApp::GameApp()
+GameApp::GameApp():
+device(0),
+rootTime(0)
 {
 	initDevice();
 
@@ -21,18 +23,24 @@ GameApp::GameApp()
 
 GameApp::~GameApp()
 {
+	delete rootTime;
 	device->drop();
 }
 
 void GameApp::main()
 {
-	PlayerFactory pf(HashedString("TestPlayerFactory"), &rootEventSource);
+	GameObjectEngine objectEngine;
+
+	PlayerFactory* pf = new PlayerFactory(HashedString("TestPlayer"), &rootEventSource);
+	objectEngine.addFactory(pf);
 	
-	GameObject* player = pf.create();
+	// create one player and grab reference to it
+	GameObject* player = objectEngine.create(HashedString("TestPlayer"));
 
 	while (getDevice()->run())
 	{
-		player->update(17);
+		objectEngine.update(*rootTime);
+
 		if (getDevice()->isWindowActive())
 		{
 			getVideoDriver()->beginScene(true, true, video::SColor(255,100,149,237));
@@ -48,7 +56,7 @@ void GameApp::main()
 		}
 	}
 
-	delete player;
+	pf->dropReference();
 }
 
 bool GameApp::OnEvent(const irr::SEvent& event)
@@ -63,6 +71,8 @@ void GameApp::initDevice()
 
 	// init device
 	device = createDevice(video::EDT_OPENGL, core::dimension2du(640, 480), 32, false, false, true);
+
+	rootTime = new GameTime(getTimer());
 
 	// must set event after creating the device
 	// otherwise, will crash while trying to access

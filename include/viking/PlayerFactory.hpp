@@ -7,6 +7,7 @@ namespace vik
 {
 
 class GameObject;
+class GameObjectEngine;
 class EventSource;
 
 class PlayerFactory : public GameObjectFactory
@@ -14,6 +15,7 @@ class PlayerFactory : public GameObjectFactory
 public:
 	PlayerFactory(HashedString factoryID, EventSource* playerEventSource);
 	GameObject* create();
+	void destroy(GameObject* destroyMe);
 private:
 	EventSource* playerEventSource;
 };

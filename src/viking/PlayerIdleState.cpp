@@ -14,7 +14,7 @@ void PlayerIdleState::onEnter()
 	//GameApp::getLogger()->log("void PlayerIdleState::onEnter()");
 }
 
-void PlayerIdleState::onUpdate(irr::f32 dt)
+void PlayerIdleState::onUpdate(GameTime& time)
 {
 	//GameApp::getLogger()->log("void PlayerIdleState::onUpdate()");
 }

@@ -7,6 +7,7 @@
 namespace vik
 {
 
+class GameTime;
 class Actor;
 
 class ActorState : public EventListener
@@ -16,7 +17,7 @@ public:
 	virtual ~ActorState(){}
 
 	virtual void onEnter(){}
-	virtual void onUpdate(irr::f32 dt){}
+	virtual void onUpdate(GameTime& time){}
 	virtual void onLeave(){}
 	
 	HashedString getName() const;
