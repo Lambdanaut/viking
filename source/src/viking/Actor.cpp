@@ -49,7 +49,6 @@ void Actor::switchToState(HashedString nextState)
 {
 	currentState->onLeave();
 
-	std::vector<ActorState*>::iterator it;
 	unsigned i;
 	for (i = 0; i < states.size(); ++i)
 	{

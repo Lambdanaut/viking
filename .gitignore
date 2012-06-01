@@ -14,5 +14,14 @@
 # Scons dblite
 .sconsign.dblite
 
+# python compiled filed
+*.pyc
+
+# vim temporary files
+*.swp
+
+# gedit temporary files
+*~
+
 # build folder
 /build
