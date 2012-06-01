@@ -59,9 +59,3 @@ Export('env viking_dirs build_configuration')
 
 # Builds Viking game
 SConscript('SConscript')
-
-# env.Append(LIBPATH = path.abspath(viking_dirs['build_bin']))
-# env.Append(LIBS = viking_dirs['target'])
-
-# Builds Viking demos
-# SConscript( path.join(viking_dirs['demos'], 'SConscript') )

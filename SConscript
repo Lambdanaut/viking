@@ -17,6 +17,7 @@ for root, dirnames, filenames in os.walk('src'):
         viking_sources.append(path.join(root,filename))
 
 # build object files
+# TODO: Is there a  more efficient way to do this? I don't understand scons well enough to know performance.
 objects = [ env.Object(source = src_file,
 		       target = path.join(viking_dirs['build_obj'], path.splitext( path.basename(src_file) )[0]) )
 		       for src_file in viking_sources ]
@@ -24,6 +25,7 @@ objects = [ env.Object(source = src_file,
 # flattens list, since env.Object returns a list of items...
 objects = sum(objects, [])
 
+# build program
 env.Program(target = path.join(viking_dirs['build_bin'], viking_dirs['target']),
 			source = objects,
 			LIBS = viking_libs)
