@@ -24,4 +24,9 @@ void PlayerIdleState::onLeave()
 	//GameApp::getLogger()->log("void PlayerIdleState::onLeave()");
 }
 
+bool PlayerIdleState::onEvent(const Event& e)
+{
+	return false;
+}
+
 } // end namespace vik

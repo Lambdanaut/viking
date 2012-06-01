@@ -2,7 +2,6 @@
 #define PLAYERIDLESTATE_HPP_INCLUDED
 
 #include "viking/ActorState.hpp"
-#include <irrlicht/IEventReceiver.h>
 
 namespace vik
 {
@@ -14,6 +13,7 @@ public:
 	void onEnter();
 	void onUpdate(GameTime& time);
 	void onLeave();
+	bool onEvent(const Event& e);
 };
 
 } // end namespace vik
