@@ -1,11 +1,15 @@
 Developer: Nicolas
 	Quests:
 	-Make HashedStrings store passed in string in a 128 byte buffer in debug builds rather than storing a reference
-	-Create test folder and hook up with an automated script
 	-Write good test cases for HashedString
+
+	-Think of a smart way to do linking for the test cases
+	-Possibly think of smarter way to do tests in general
+	-Perhaps a Test build which just runs a bunch of stuff?
+
 	-'''CONSIDER''' making EventSource store listeners as a set (worried about double adding/double removing)
 	-Document lifetimes and shared ownership better between game object factories engines and game objects themselves
-	-Document dependencies of project better (Irrlicht, Scons, C++11...)
+	-Document dependencies of project better (Irrlicht, SCons, C++11...)
 	-Implement Actor input for Player derivative
 	-Implement Actor visuals
 	

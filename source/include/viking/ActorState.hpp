@@ -1,7 +1,7 @@
 #ifndef ACTORSTATE_HPP_INCLUDED
 #define ACTORSTATE_HPP_INCLUDED
 
-#include "viking/HashString.hpp"
+#include "viking/HashedString.hpp"
 #include "viking/EventListener.hpp"
 
 namespace vik

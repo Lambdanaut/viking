@@ -1,7 +1,7 @@
 #ifndef GAMEOBJECTFACTORY_HPP_INCLUDED
 #define GAMEOBJECTFACTORY_HPP_INCLUDED
 
-#include "viking/HashString.hpp"
+#include "viking/HashedString.hpp"
 #include "viking/ReferenceCounted.hpp"
 
 namespace vik

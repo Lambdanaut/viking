@@ -1,7 +1,7 @@
 #ifndef RTTIBASE_HPP_INCLUDED
 #define RTTIBASE_HPP_INCLUDED
 
-#include "viking/HashString.hpp"
+#include "viking/HashedString.hpp"
 
 namespace vik
 {
