@@ -6,6 +6,10 @@ Developer: Nicolas
 	-Think of a smart way to do linking for the test cases
 	-Possibly think of smarter way to do tests in general
 	-Perhaps a Test build which just runs a bunch of stuff?
+	-Consideration: common source folder with game-specific subfolders
+	-Test could be considered a game which in reality just tests the engine
+	-Allows multiple games to be developed with the same engine installation, great!!!!!!
+	-im the motherfucking batman
 
 	-'''CONSIDER''' making EventSource store listeners as a set (worried about double adding/double removing)
 	-Document lifetimes and shared ownership better between game object factories engines and game objects themselves
