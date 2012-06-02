@@ -9,6 +9,8 @@ Developer: Nicolas
 	-Consideration: common source folder with game-specific subfolders
 	-Test could be considered a game which in reality just tests the engine
 	-Allows multiple games to be developed with the same engine installation, great!!!!!!
+	-viking folder stores engine files, other folders store game specific files.
+	-This completely separates both projects, yes!!!
 	-im the motherfucking batman
 
 	-'''CONSIDER''' making EventSource store listeners as a set (worried about double adding/double removing)
