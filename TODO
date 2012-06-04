@@ -3,15 +3,13 @@ Developer: Nicolas
 	-Make HashedStrings store passed in string in a 128 byte buffer in debug builds rather than storing a reference
 	-Implement some kind of Test class which is a no-op in non-test builds.
 	-Write good test cases for HashedString
-	-'''CONSIDER''' making EventSource store listeners as a set (worried about double adding/double removing)
-	-Document lifetimes and shared ownership better between game object factories engines and game objects themselves
-	-Document dependencies of project better (Irrlicht, SCons, C++11...)
+	-CONSIDER making EventSource store listeners as a set (worried about double adding/double removing)
+	-CONSIDER if the GameObjectEngine should store objects and factories as a set or vector or list
 	-Implement Actor input for Player derivative
 	-Implement Actor visuals
 	
-
-Future quest ideas:
-Island survival theme
-Drop in drop out 4 player
-Ambient soundtrack
-Build character/buildings
+Future ideas:
+	Island survival theme
+	Drop in drop out 4 player
+	Ambient soundtrack
+	Build character/buildings

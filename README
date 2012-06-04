@@ -1,23 +1,69 @@
-Viking
-======
+=================
+-----VIKING------
+=================
 
 Codename Viking game project. Work in progress by UVic GameDev club.
 
 =================
-TODO LIST
+----TODO LIST----
 =================
 
-See TODO
+See TODO file in repository root folder
 
 =================
-Naming Convention
+Build Dependencies
 =================
-class/struct names are UpperCase
-primitive type names (u32, s16, etc) are lowercase
-function names are camelCase
-member variables are camelCase
 
-header guards look like FILENAME_HPP_INCLUDED
+Building this project requires:
 
-everything should be in the "vik" namespace
-close namespaces with "} // end namespace vik"
+	1) The Irrlicht rendering engine.
+		The library files for Irrlicht must be in your path.
+		The include files for irrlicht must be accessible as <irrlicht/Irrlicht.h>
+		I recommend downloading the latest version of Irrlicht from their SVN repository.
+		Follow the instructions here to set it up: http://irrlicht3d.org/wiki/index.php?n=Main.InstallingIrrlicht
+
+	2) Scons software construction tool 
+		On ubuntu, download it with "sudo apt-get install scons"
+		otherwise: http://www.scons.org/
+
+	3) C++ compiler with good C++11 support (g++ recommended)
+		I think Scons somehow detects which compiler you should use?
+
+	4) You should have python installed whether or not you decide to build this project. Python is just awesome.
+
+=================
+Naming Convention (work in progress)
+=================
+
+Types and functions:
+	class/struct naming: UpperCase
+
+	primitive typedefs (u32, s32): lowercase
+
+	function: camelCase
+
+	member variables: camelCase
+
+Files:
+	One class per file
+
+	Files have the same name as class, including capitalization.
+
+	Headers use .hpp extension rather than .h
+
+	Source files use .cpp extension rather than .cc or .c++
+
+	header guards for MyClass.hpp:
+		#ifndef MYCLASS_HPP_INCLUDED
+		#define MYCLASS_HPP_INCLUDED
+		#endif // MYCLASS_HPP_INCLUDED
+
+	namespace for all code in project:
+		namespace vik
+		{
+		NOTE: no indentation inside the namespace
+		} // end namespace vik
+
+If you are not sure about an element of naming conventions,
+Either look for something similar already done in the code base OR
+ask Nicolas so he can tell you he doesn't care as long as it's sensitive and consistent.
