@@ -6,6 +6,7 @@ namespace vik
 
 class Event;
 
+// Interface enabling class to respond to Event signals
 class EventListener
 {
 public:

@@ -1,5 +1,5 @@
-#ifndef HASHSTRING_HPP_INCLUDED
-#define HASHSTRING_HPP_INCLUDED
+#ifndef HASHEDSTRING_HPP_INCLUDED
+#define HASHEDSTRING_HPP_INCLUDED
 
 #include <irrlicht/irrTypes.h>
 
@@ -83,4 +83,4 @@ bool HashedString::operator<(const HashedString& other) const
 
 } // end namespace vik
 
-#endif // HASHSTRING_HPP_INCLUDED
+#endif // HASHEDSTRING_HPP_INCLUDED

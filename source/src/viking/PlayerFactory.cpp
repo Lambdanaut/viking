@@ -8,7 +8,7 @@ namespace vik
 {
 
 PlayerFactory::PlayerFactory(HashedString factoryID, EventSource* playerEventSource):
-GameObjectFactory(factoryID),
+ActorFactory(factoryID),
 playerEventSource(playerEventSource)
 {
 }
@@ -27,11 +27,9 @@ GameObject* PlayerFactory::create()
 	return player;
 }
 
-void PlayerFactory::destroy(GameObject* destroyMe)
+void PlayerFactory::destroy(Actor* destroyMe)
 {
-	Actor* player = static_cast<Actor*>(destroyMe);
-
-	playerEventSource->removeListener(player);
+	playerEventSource->removeListener(destroyMe);
 }
 
 }

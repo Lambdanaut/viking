@@ -7,20 +7,16 @@
 namespace vik
 {
 
+// Adapter class to wrap Irrlicht's events with viking's events.
 class IrrlichtEvent : public Event
 {
 public:
 	IrrlichtEvent(const irr::SEvent& e);
 
-	const irr::SEvent& getEvent() const
-	{
-		return ievent;
-	}
+	// returns reference to original irrlicht event
+	const irr::SEvent& getEvent() const;
 
-	HashedString getTypeInfo() const
-	{
-		return HashedString("IrrlichtEvent");
-	}
+	HashedString getType() const;
 private:
 	const irr::SEvent& ievent;
 };

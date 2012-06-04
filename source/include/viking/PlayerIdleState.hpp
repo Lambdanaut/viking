@@ -6,6 +6,7 @@
 namespace vik
 {
 
+// state a player is in when they are not moving (hence idle)
 class PlayerIdleState : public ActorState
 {
 public:

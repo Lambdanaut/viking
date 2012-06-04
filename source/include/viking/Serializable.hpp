@@ -7,6 +7,8 @@ namespace vik
 {
 
 // interface for serializable classes
+// follows the exact same interface as Irrlicht's serializable class.
+// Read its documentation or find uses of it for more information on how to use this.
 class Serializable
 {
 public:

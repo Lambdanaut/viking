@@ -12,6 +12,7 @@ GameObjectEngine::~GameObjectEngine()
 	{
 		(*it)->dropReference();
 	}
+	
 }
 
 void GameObjectEngine::update(GameTime& time)
@@ -32,19 +33,21 @@ void GameObjectEngine::addObject(GameObject* object)
 void GameObjectEngine::removeObject(GameObject* object)
 {
 	object->dropReference();
-	objectList.erase(objectList.find(object));
+	std::set<GameObject*>::iterator it = objectList.find(object);
+	assert(it != objectList.end());
+	objectList.erase(it);
 }
 
 void GameObjectEngine::addFactory(GameObjectFactory* factory)
 {
 	factory->grabReference();
-	factoryList.push_back(factory);
+	assert(factoryList.find(factory) == factoryList.end());
+	factoryList.insert(factory);
 }
 
 void GameObjectEngine::removeFactory(GameObjectFactory* factory)
 {
-	std::vector<GameObjectFactory*>::iterator it;
-	it = std::find(factoryList.begin(),factoryList.end(), factory);
+	std::set<GameObjectFactory*>::iterator it = factoryList.find(factory);
 	assert(it != factoryList.end());
 	factory->dropReference();
 	factoryList.erase(it);
@@ -52,7 +55,7 @@ void GameObjectEngine::removeFactory(GameObjectFactory* factory)
 
 GameObject* GameObjectEngine::create(HashedString factoryID)
 {
-	for (std::vector<GameObjectFactory*>::iterator it = factoryList.begin(); it != factoryList.end(); ++it)
+	for (std::set<GameObjectFactory*>::iterator it = factoryList.begin(); it != factoryList.end(); ++it)
 	{
 		if ((*it)->getFactoryID() == factoryID)
 		{

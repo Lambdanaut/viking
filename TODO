@@ -1,18 +1,8 @@
 Developer: Nicolas
 	Quests:
 	-Make HashedStrings store passed in string in a 128 byte buffer in debug builds rather than storing a reference
+	-Implement some kind of Test class which is a no-op in non-test builds.
 	-Write good test cases for HashedString
-
-	-Think of a smart way to do linking for the test cases
-	-Possibly think of smarter way to do tests in general
-	-Perhaps a Test build which just runs a bunch of stuff?
-	-Consideration: common source folder with game-specific subfolders
-	-Test could be considered a game which in reality just tests the engine
-	-Allows multiple games to be developed with the same engine installation, great!!!!!!
-	-viking folder stores engine files, other folders store game specific files.
-	-This completely separates both projects, yes!!!
-	-im the motherfucking batman
-
 	-'''CONSIDER''' making EventSource store listeners as a set (worried about double adding/double removing)
 	-Document lifetimes and shared ownership better between game object factories engines and game objects themselves
 	-Document dependencies of project better (Irrlicht, SCons, C++11...)

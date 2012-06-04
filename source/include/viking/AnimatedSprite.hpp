@@ -6,6 +6,8 @@
 namespace vik
 {
 
+// TODO: Make this class a lot better, maybe throw it out and start a better one.
+// For now just displays a black square as a billboard scene node...
 class AnimatedSprite
 {
 public:

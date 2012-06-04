@@ -15,29 +15,16 @@ class GameObjectFactory : public ReferenceCounted
 public:
 	// factoryID is used to make calls to this factory at runtime
 	// Each factory in a GameObjectEngine should have a unique ID
-	inline GameObjectFactory(HashedString factoryID);
+	GameObjectFactory(HashedString factoryID);
 	virtual ~GameObjectFactory(){}
 
 	// allocate and construct new instance of a GameObject subclass
 	virtual GameObject* create() = 0;
 
-	// unwrap everything from the game object, destroy it but don't deallocate it
-	virtual void destroy(GameObject* destroyMe) = 0;
-
-	inline HashedString getFactoryID() const; 
+	HashedString getFactoryID() const; 
 private:
 	HashedString factoryID;
 };
-
-GameObjectFactory::GameObjectFactory(HashedString factoryID):
-factoryID(factoryID)
-{
-}
-
-HashedString GameObjectFactory::getFactoryID() const
-{
-	return factoryID;
-}
 
 } // end namespace vik
 

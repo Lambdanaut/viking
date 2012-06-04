@@ -1,12 +1,13 @@
 #include "viking/Actor.hpp"
 #include "viking/GameTime.hpp"
+#include "viking/ActorFactory.hpp"
 #include <cassert>
 
 namespace vik
 {
 
-Actor::Actor(GameObjectFactory* manufacturer):
-GameObject(manufacturer),
+Actor::Actor(ActorFactory* manufacturer):
+manufacturer(manufacturer),
 currentState(0)
 {
 }
@@ -18,10 +19,12 @@ Actor::~Actor()
 		currentState->onLeave();
 	}
 
-	for (unsigned i = 0; i < states.size(); ++i)
+	for (int i = static_cast<int>(states.size()) - 1; i >= 0; --i)
 	{
 		delete states[i];
 	}
+
+	manufacturer->destroy(this);
 }
 
 void Actor::startStateMachine(HashedString initialStateName)
@@ -71,11 +74,6 @@ void Actor::update(GameTime& time)
 bool Actor::onEvent(const Event& e)
 {
 	return currentState->onEvent(e);
-}
-
-HashedString Actor::getTypeInfo() const
-{
-	return HashedString("Actor");
 }
 
 } // end namespace vik

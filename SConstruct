@@ -6,10 +6,10 @@ from os import path
 # directory info
 viking_dirs = { 
 'target': 'viking',
-'src': 'source/src',
-'include': 'source/include',
-'build': 'build',
-'obj': 'obj',
+'src': 'source/src', # root of source files
+'include': 'source/include', # root of include directory
+'build': 'build', # name of the build folder created in the root of the repository
+'obj': 'obj', # name of the build subdirectory where object files are built
 'bin': 'bin',
 'release': 'Release',
 'debug': 'Debug',
@@ -61,15 +61,8 @@ else:
 viking_dirs['build_obj'] = path.abspath(path.join(viking_dirs['build'], configuration_path, viking_dirs['obj']))
 viking_dirs['build_bin'] = path.abspath(path.join(viking_dirs['build'], configuration_path, viking_dirs['bin']))
 
-# compose path to build of Viking tests
-viking_dirs['test_obj'] = path.abspath(path.join(viking_dirs['build'], viking_dirs['test'] + configuration_path, viking_dirs['obj']))
-viking_dirs['test_bin'] = path.abspath(path.join(viking_dirs['build'], viking_dirs['test'] + configuration_path, viking_dirs['bin']))
-
 # export variables so other scripts can Import them
 Export('env viking_dirs build_configuration viking_libs')
 
-# Builds Viking game
+# Run script to selectively build viking sub-projects
 SConscript('source/SConscript')
-
-# Builds and runs test cases
-SConscript('test/SConscript')

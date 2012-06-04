@@ -30,7 +30,7 @@ public:
 	void setTime(irr::u32 time);
 
 	// resumes and pauses the virtual timer
-	// behaves like a stack: each call of stop must be matched by a start
+	// behaves like a stack: each call of stop must be matched by a start, otherwise it will not restart.
 	void start();
 	void stop();
 
