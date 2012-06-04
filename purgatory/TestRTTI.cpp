@@ -5,6 +5,7 @@
 namespace vik
 {
 
+// TODO: Try instead of declaring a TypeInfo variable declaring a static function that returns a local static variable.
 class RTTI
 {
 public:
