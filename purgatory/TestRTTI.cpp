@@ -1,76 +1,75 @@
 #include <vector>
 #include <iostream>
+#include <typeinfo>
 #include <cassert>
 
-namespace vik
-{
+using namespace std;
 
+// interface to the RTTI (RunTime Type Information) of a class
+// Not to be created directly, use the RTTI_DECLARE/DEFINE macros below.
 class RTTI
 {
 public:
-	RTTI(const char* className, const std::vector<const RTTI*>& parents):
-	thisClassName(className),
-	parentRTTI(parents)
+	RTTI( const char* className, const std::vector<const RTTI*>& parents ):
+	className( className ),
+  	parents( parents )
 	{
-	}
-	
-	const char* getClassName() const
-	{
-		return thisClassName;
 	}
 
-	bool derivesFrom(const RTTI& r) const
+	const char* getClassName() const
 	{
-		if (this == &r)
+
+		return className;
+	}
+
+	bool derivesFrom( const RTTI& r ) const
+	{
+
+		if ( this == &r )
 		{
+
 			return true;
 		}
-		for (int i = static_cast<int>(parentRTTI.size()) - 1; i >= 0; --i)
+
+		for ( int i = static_cast<int>(parents.size()) - 1; i >= 0; --i )
 		{
-			if ( parentRTTI[i]->derivesFrom(r) )
+
+			if ( parents[i]->derivesFrom( r ) )
 			{
+
 				return true;
 			}
 		}
+
 		return false;
 	}
+
 private:
-	const char* thisClassName;
-	const std::vector<const RTTI*> parentRTTI;
+	const char* className;
+	const vector<const RTTI*> parents;
 };
 
-// declares typeinfo member variables/functions to be used within a class declaration
+// generates parameters for the RTTI constructor by expanding a variadic template into an array
+template<typename Derived, typename... Parents>
+class RTTIInfo : public RTTI
+{
+public:
+	RTTIInfo( const char* className ):
+	RTTI( className, { &Parents::typeInfo... } ) 
+	{
+	}
+};
+
+// declares necessary members for RTTI. To be used within the class declaration.
 #define RTTI_DECLARE() \
 	public: static const RTTI typeInfo; \
-	public:  virtual const RTTI& getTypeInfo() const { return typeInfo; }
+	public: virtual const RTTI& getTypeInfo() const { return typeInfo; }
 
-// defines static typeinfo variables, to be used in a source file and to match an RTTI_DECLARE within a class declaration elsewhere.
+// defines the members declared in a class declaration for RTTI. To be used in the .cpp file associated with the class declaration.
+#define RTTI_DEFINE(ThisClass, Parents...) \
+	const RTTI ThisClass::typeInfo = RTTIInfo<ThisClass, ##Parents>(#ThisClass);
 
-// For base classes
-#define RTTI_DEFINE0(ThisClass) \
-	const RTTI ThisClass::typeInfo(#ThisClass, {})
-
-// For classes which use single inheritance
-#define RTTI_DEFINE1(ThisClass, ParentClass) \
-	const RTTI ThisClass::typeInfo(#ThisClass, { &ParentClass::typeInfo })
-
-// For classes which use multiple inheritance with 2 parents
-#define RTTI_DEFINE2(ThisClass, ParentClass1, ParentClass2) \
-	const RTTI ThisClass::typeInfo(#ThisClass, { &ParentClass1::typeInfo, &ParentClass2::typeInfo })
-
-// For classes which use multiple inheritance with 3 parents
-#define RTTI_DEFINE3(ThisClass, ParentClass1, ParentClass2, ParentClass3) \
-	const RTTI ThisClass::typeInfo(#ThisClass, { &ParentClass1::typeInfo, &ParentClass2::typeInfo , &ParentClass3::typeInfo })
-
-// For classes which use multiple inheritance with 4 parents
-#define RTTI_DEFINE4(ThisClass, ParentClass1, ParentClass2, ParentClass3, ParentClass4) \
-	const RTTI ThisClass::typeInfo(#ThisClass, { &ParentClass1::typeInfo, &ParentClass2::typeInfo , &ParentClass3::typeInfo, &ParentClass4::typeInfo })
-
-// For classes which use multiple inheritance with 5 parents
-#define RTTI_DEFINE5(ThisClass, ParentClass1, ParentClass2, ParentClass3, ParentClass4, ParentClass5) \
-	const RTTI ThisClass::typeInfo(#ThisClass, { &ParentClass1::typeInfo, &ParentClass2::typeInfo , &ParentClass3::typeInfo, &ParentClass4::typeInfo, &ParentClass5::typeInfo })
-
-// TODO: Add more copy and pasted versions if ever necessary
+// Unit tests
 
 class StaffMember
 {
@@ -97,11 +96,11 @@ class Sailboat
 	RTTI_DECLARE();
 };
 
-RTTI_DEFINE0(StaffMember);
-RTTI_DEFINE1(Librarian,StaffMember);
-RTTI_DEFINE1(Teacher,StaffMember);
-RTTI_DEFINE2(TeachingLibrarian,Teacher,Librarian);
-RTTI_DEFINE0(Sailboat);
+RTTI_DEFINE(StaffMember);
+RTTI_DEFINE(Librarian,StaffMember);
+RTTI_DEFINE(Teacher,StaffMember);
+RTTI_DEFINE(TeachingLibrarian,Teacher,Librarian);
+RTTI_DEFINE(Sailboat);
 
 void classfulRTTITest()
 {
@@ -171,12 +170,11 @@ void classlessRTTITest()
 	std::cout << "Classless tests successful" << std::endl;
 }
 
-}
-
 int main()
 {
-	vik::classlessRTTITest();
-	vik::classfulRTTITest();
+	classlessRTTITest();
+	classfulRTTITest();
 
 	std::cout << "All tests successful" << std::endl;
 }
+
