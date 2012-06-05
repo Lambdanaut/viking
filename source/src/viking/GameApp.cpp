@@ -3,6 +3,7 @@
 #include "viking/PlayerFactory.hpp"
 #include <irrlicht/irrlicht.h>
 #include "viking/IrrlichtEvent.hpp"
+#include <iostream>
 
 using namespace irr;
 
@@ -12,8 +13,7 @@ namespace vik
 GameApp* GameApp::instance;
 
 GameApp::GameApp():
-device(0),
-rootTime(0)
+device(0)
 {
 	initDevice();
 
@@ -23,23 +23,30 @@ rootTime(0)
 
 GameApp::~GameApp()
 {
-	delete rootTime;
 	device->drop();
 }
 
 void GameApp::main()
 {
+	// hook up keymap with event source -- must remove at end of scope
+	rootEventSource.addListener(&keyMap);
+
 	GameObjectEngine objectEngine;
 
 	PlayerFactory* pf = new PlayerFactory(HashedString("TestPlayer"), &rootEventSource);
+
+	// give away ownership to the objectEngine
 	objectEngine.addFactory(pf);
+	pf->dropReference();
 	
-	// create one player and grab reference to it
+	// create one player for testing
 	GameObject* player = objectEngine.create(HashedString("TestPlayer"));
 
 	while (getDevice()->run())
 	{
-		objectEngine.update(*rootTime);
+		controllerPanel.update(keyMap);
+
+		objectEngine.update(rootTime);
 
 		if (getDevice()->isWindowActive())
 		{
@@ -56,7 +63,7 @@ void GameApp::main()
 		}
 	}
 
-	pf->dropReference();
+	rootEventSource.removeListener(&keyMap);
 }
 
 bool GameApp::OnEvent(const irr::SEvent& event)
@@ -72,7 +79,7 @@ void GameApp::initDevice()
 	// init device
 	device = createDevice(video::EDT_OPENGL, core::dimension2du(640, 480), 32, false, false, true);
 
-	rootTime = new GameTime(getTimer());
+	rootTime.setTimer(getTimer());
 
 	// must set event after creating the device
 	// otherwise, will crash while trying to access

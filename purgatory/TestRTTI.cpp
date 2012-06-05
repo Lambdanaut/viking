@@ -104,12 +104,14 @@ RTTI_DEFINE(Sailboat);
 
 void classfulRTTITest()
 {
-	// these will leak memory but I don't care for this test
 	StaffMember* staff = new StaffMember();
 	StaffMember* librarian = new Librarian();
 	StaffMember* teacher = new Teacher();
 	StaffMember* teachingLibrarian = new TeachingLibrarian();
 	Sailboat* sailboat = new Sailboat();
+
+	// bogus line to make the compiler not give warnings about unused variables in release builds
+	(void)staff, (void)librarian, (void)teacher, (void)teachingLibrarian, (void)sailboat;
 
 	// class name
 	assert(std::string(staff->getTypeInfo().getClassName()) == "StaffMember");
@@ -134,6 +136,12 @@ void classfulRTTITest()
 
 	// multiple inheritance 1 level invalid upcast
 	assert(teachingLibrarian->getTypeInfo().derivesFrom(sailboat->getTypeInfo()) == false);
+
+	delete staff;
+	delete librarian;
+	delete teacher;
+	delete teachingLibrarian;
+	delete sailboat;
 
 	std::cout << "Classful tests successful" << std::endl;
 }

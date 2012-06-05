@@ -69,3 +69,32 @@ Files:
 If you are not sure about an element of naming conventions,
 Either look for something similar already done in the code base OR
 ask Nicolas so he can tell you he doesn't care as long as it's sensitive and consistent.
+
+=================
+------Builds-----
+=================
+
+viking uses the scons build system, because it "just works" often.
+To build viking, type in "scons" from the command line, with optional arguments specified later in the README.
+The build will be created in build/CONFIGURATION/bin/, where CONFIGURATION is either Release or Debug.
+
+You may clean a build with "scons -c". Note that this will clean the release build. If you want to clean the debug
+build or clean the tests as well, you must use something like "scons debug=1 test=1 -c" (for more info on debug and test, read further in this document)
+
+=================
+----Debugging----
+=================
+
+By default, the scons script builds in release mode. To build in debug mode, you must append the "debug=1" argument.
+
+Put simply, building in debug mode can be done by using the command "scons debug=1"
+
+=================
+--Unit Testing--
+=================
+
+Files in the purgatory are there for testing before integrating into the engine.
+Files in the purgatory folder that match the pattern Test*.cpp are compiled if you run scons with the argument test=1
+Note that the assert() macro sometimes used for testing only works if you also build with the debug=1 argument
+
+Therefore, the correct way to build the unit tests is "scons test=1 debug=1"

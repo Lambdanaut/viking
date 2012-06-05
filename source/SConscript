@@ -1,5 +1,4 @@
 # python libraries used in this file
-from glob import glob
 import os
 from os import path
 import fnmatch

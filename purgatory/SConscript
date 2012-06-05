@@ -1,0 +1,24 @@
+# python libraries used in this file
+import os
+from os import path
+from glob import glob
+
+# import scons environment variables
+Import('env viking_dirs viking_libs build_configuration')
+
+# picks up all files ending with .cpp in the source folders
+viking_sources = glob('Test*.cpp')
+
+print build_configuration
+
+objects = [ env.Object(source = src_file,
+		       target = path.join(viking_dirs['build'], build_configuration, path.splitext( path.basename(src_file) )[0]))
+		       for src_file in viking_sources ]
+
+# flattens list, since env.Object returns a list of items...
+objects = sum(objects, [])
+
+# build tests
+for object in objects:
+	env.Program(source = object,
+			LIBS = viking_libs['common'])

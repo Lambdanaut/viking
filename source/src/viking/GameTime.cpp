@@ -10,6 +10,11 @@ deltaTime(0)
 {
 }
 
+void GameTime::setTimer(irr::ITimer* timer)
+{
+	this->timer = timer;
+}
+
 irr::u32 GameTime::getRealTime() const
 {
 	return timer->getRealTime();

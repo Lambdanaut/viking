@@ -1,10 +1,8 @@
 Developer: Nicolas
 	Quests:
-	-Implement some kind of Test class which is a no-op in non-test builds.
-	-CONSIDER making EventSource store listeners as a set (worried about double adding/double removing)
-	-CONSIDER if the GameObjectEngine should store objects and factories as a set or vector or list
 	-Implement Actor input for Player derivative
 	-Implement Actor visuals
+	-Eventually consider splitting up the gameobjectengine's factorylist and objectlist into their own classes
 	
 Future ideas:
 	Island survival theme

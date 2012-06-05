@@ -64,5 +64,11 @@ viking_dirs['build_bin'] = path.abspath(path.join(viking_dirs['build'], configur
 # export variables so other scripts can Import them
 Export('env viking_dirs build_configuration viking_libs')
 
-# Run script to selectively build viking sub-projects
-SConscript('source/SConscript')
+# subdirectories with SConscripts in them
+script_subdirs = ['source']
+
+if ARGUMENTS.get('test',0):
+	script_subdirs += ['purgatory']
+
+# Run scripts to selectively build viking sub-projects
+SConscript(dirs=script_subdirs, name='SConscript')

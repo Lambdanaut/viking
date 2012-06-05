@@ -9,7 +9,9 @@ namespace vik
 class GameTime
 {
 public:
-	GameTime(irr::ITimer* timer);
+	// note: Making any calls to GameTime when the timer is null is undefined behaviour.
+	GameTime(irr::ITimer* timer = 0);
+	void setTimer(irr::ITimer* timer);
 
 	// current time in milliseconds of system
 	irr::u32 getRealTime() const;

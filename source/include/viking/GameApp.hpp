@@ -1,9 +1,12 @@
 #ifndef GAMEAPP_HPP_INCLUDED
 #define GAMEAPP_HPP_INCLUDED
+
 #include <irrlicht/irrlicht.h>
 #include "viking/EventSource.hpp"
 #include "viking/GameObjectEngine.hpp"
 #include "viking/GameTime.hpp"
+#include "viking/KeyMap.hpp"
+#include "viking/ControllerControlPanel.hpp"
 
 namespace vik
 {
@@ -31,13 +34,25 @@ public:
 	static inline irr::ILogger* getLogger();
 	static inline irr::ITimer* getTimer();
 private:
+	// pointer to most recently created instance of GameApp. Not exactly a static singleton.
 	static GameApp* instance;
+
+	// interface for the irrlicht library
 	irr::IrrlichtDevice* device;
 
 	void initDevice();
 
+	// distributes events to event listeners at the highest level
 	EventSource rootEventSource;
-	GameTime* rootTime;
+
+	// remembers the current state of all keys
+	KeyMap keyMap;
+
+	// Manages controllers
+	ControllerControlPanel controllerPanel;
+
+	// timer which delivers delta time at the highest level
+	GameTime rootTime;
 };
 
 GameApp* GameApp::getInstance()
