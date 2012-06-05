@@ -81,6 +81,14 @@ The build will be created in build/CONFIGURATION/bin/, where CONFIGURATION is ei
 You may clean a build with "scons -c". Note that this will clean the release build. If you want to clean the debug
 build or clean the tests as well, you must use something like "scons debug=1 test=1 -c" (for more info on debug and test, read further in this document)
 
+here's a summary of the arguments, which have their use documented later in this document:
+-------------------------------------------
+name		default		summary
+-------------------------------------------
+viking		1		builds viking application from source in 'source' subdirectory
+debug		0		builds everything in debug mode (if set to 0, will build in release mode)
+test		0		builds unit tests in 'tests' subdirectory
+
 =================
 ----Debugging----
 =================
@@ -89,12 +97,17 @@ By default, the scons script builds in release mode. To build in debug mode, you
 
 Put simply, building in debug mode can be done by using the command "scons debug=1"
 
+Debug mode will enable debug symbols with -g and define _DEBUG
+Release mode will enable optimization and define NDEBUG
+
 =================
 --Unit Testing--
 =================
 
-Files in the purgatory are there for testing before integrating into the engine.
-Files in the purgatory folder that match the pattern Test*.cpp are compiled if you run scons with the argument test=1
+Files in the 'tests' directory are there for testing before integrating into the engine.
+Files in the 'tests' folder that match the pattern Test*.cpp are compiled if you run scons with the argument test=1
 Note that the assert() macro sometimes used for testing only works if you also build with the debug=1 argument
 
 Therefore, the correct way to build the unit tests is "scons test=1 debug=1"
+
+If you only want to build the tests but not viking, you can specify "viking=0 test=1" in the command line to do so.

@@ -33,7 +33,7 @@ viking_libs = {
 build_configuration = ''
 
 # pick up "debug" argument from command line input. Defaults to 0 (false).
-if ARGUMENTS.get('debug', 0):
+if ARGUMENTS.get('debug', '0') != '0':
 	build_configuration = viking_dirs['debug']
 else:
 	build_configuration = viking_dirs['release']
@@ -65,10 +65,15 @@ viking_dirs['build_bin'] = path.abspath(path.join(viking_dirs['build'], configur
 Export('env viking_dirs build_configuration viking_libs')
 
 # subdirectories with SConscripts in them
-script_subdirs = ['source']
+script_subdirs = []
 
-if ARGUMENTS.get('test',0):
-	script_subdirs += ['purgatory']
+if ARGUMENTS.get('viking','1') != '0':
+	script_subdirs += ['source']
+
+if ARGUMENTS.get('test','0') != '0':
+	script_subdirs += ['tests']
+
+print script_subdirs
 
 # Run scripts to selectively build viking sub-projects
 SConscript(dirs=script_subdirs, name='SConscript')
