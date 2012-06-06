@@ -43,7 +43,7 @@ private:
 };
 
 // generates parameters for the RTTI constructor by expanding a variadic template into an array
-template<typename Derived, typename... Parents>
+template<class Derived, class... Parents>
 class RTTIInfo : public RTTI
 {
 public:
