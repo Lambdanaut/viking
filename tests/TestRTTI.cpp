@@ -13,7 +13,7 @@ public:
 	{
 	}
 
-	const char* getClassName() const
+	const char* getName() const
 	{
 		return className;
 	}
@@ -48,52 +48,54 @@ class RTTIInfo : public RTTI
 {
 public:
 	RTTIInfo( const char* className ):
-	RTTI( className, { &Parents::typeInfo... } ) 
+	RTTI( className, { &Parents::getClass()... } ) 
 	{
 	}
 };
 
 // declares necessary members for RTTI. To be used within the class declaration.
-#define RTTI_DECLARE() \
-	public: static const RTTI typeInfo; \
-	public: virtual const RTTI& getTypeInfo() const { return typeInfo; }
-
-// defines the members declared in a class declaration for RTTI. To be used in the .cpp file associated with the class declaration.
-#define RTTI_DEFINE(ThisClass, Parents...) \
-	const RTTI ThisClass::typeInfo = RTTIInfo<ThisClass, ##Parents>(#ThisClass);
+#define ClassInfo(ThisClass, Parents...) \
+	virtual const RTTI& getInstanceClass() const \
+	{ \
+		return ThisClass::getClass(); \
+	} \
+	static const RTTI& getClass() \
+	{ \
+		static const RTTI typeInfo = RTTIInfo<ThisClass, ##Parents>(#ThisClass); \
+		return typeInfo; \
+	} 
 
 // Unit tests
 
 class StaffMember
 {
-	RTTI_DECLARE();
+public:
+	ClassInfo(StaffMember);
 };
 
 class Librarian : virtual public StaffMember
 {
-	RTTI_DECLARE();
+public:
+	ClassInfo(Librarian,StaffMember);
 };
 
 class Teacher : virtual public StaffMember
 {
-	RTTI_DECLARE();
+public:
+	ClassInfo(Teacher,StaffMember);
 };
 
 class TeachingLibrarian : public Teacher, public Librarian
 {
-	RTTI_DECLARE();
+public:
+	ClassInfo(TeachingLibrarian,Teacher,Librarian);
 };
 
 class Sailboat
 {
-	RTTI_DECLARE();
+public:
+	ClassInfo(Sailboat);
 };
-
-RTTI_DEFINE(StaffMember);
-RTTI_DEFINE(Librarian,StaffMember);
-RTTI_DEFINE(Teacher,StaffMember);
-RTTI_DEFINE(TeachingLibrarian,Teacher,Librarian);
-RTTI_DEFINE(Sailboat);
 
 void classfulRTTITest()
 {
@@ -107,28 +109,28 @@ void classfulRTTITest()
 	(void)staff, (void)librarian, (void)teacher, (void)teachingLibrarian, (void)sailboat;
 
 	// class name
-	assert(std::string(staff->getTypeInfo().getClassName()) == "StaffMember");
+	assert(std::string(staff->getInstanceClass().getName()) == "StaffMember");
 
 	// single inheritance valid upcast
-	assert(librarian->getTypeInfo().derivesFrom(staff->getTypeInfo()));
+	assert(librarian->getInstanceClass().derivesFrom(staff->getInstanceClass()));
 
 	// single inheritance valid upcast through static member
-	assert(librarian->getTypeInfo().derivesFrom(StaffMember::typeInfo));
+	assert(librarian->getInstanceClass().derivesFrom(StaffMember::getClass()));
 
 	// single inheritance invalid upcast
-	assert(librarian->getTypeInfo().derivesFrom(sailboat->getTypeInfo()) == false);
+	assert(librarian->getInstanceClass().derivesFrom(sailboat->getInstanceClass()) == false);
 
 	// single inheritance invalid cross-cast
-	assert(librarian->getTypeInfo().derivesFrom(teacher->getTypeInfo()) == false);
+	assert(librarian->getInstanceClass().derivesFrom(teacher->getInstanceClass()) == false);
 
 	// multiple inheritance 1 level valid upcast
-	assert(teachingLibrarian->getTypeInfo().derivesFrom(librarian->getTypeInfo()));
+	assert(teachingLibrarian->getInstanceClass().derivesFrom(librarian->getInstanceClass()));
 
 	// multiple inheritance 2 level valid upcast
-	assert(teachingLibrarian->getTypeInfo().derivesFrom(staff->getTypeInfo()));
+	assert(teachingLibrarian->getInstanceClass().derivesFrom(staff->getInstanceClass()));
 
 	// multiple inheritance 1 level invalid upcast
-	assert(teachingLibrarian->getTypeInfo().derivesFrom(sailboat->getTypeInfo()) == false);
+	assert(teachingLibrarian->getInstanceClass().derivesFrom(sailboat->getInstanceClass()) == false);
 
 	delete staff;
 	delete librarian;
@@ -148,7 +150,7 @@ void classlessRTTITest()
 	const RTTI fruitType("Fruit", {});
 
 	// class name
-	assert(std::string(vehicleType.getClassName()) == "Vehicle");
+	assert(std::string(vehicleType.getName()) == "Vehicle");
 
 	// single inheritance valid upcast
 	assert(landVehicleType.derivesFrom(vehicleType));

@@ -73,7 +73,5 @@ if ARGUMENTS.get('viking','1') != '0':
 if ARGUMENTS.get('test','0') != '0':
 	script_subdirs += ['tests']
 
-print script_subdirs
-
 # Run scripts to selectively build viking sub-projects
 SConscript(dirs=script_subdirs, name='SConscript')
