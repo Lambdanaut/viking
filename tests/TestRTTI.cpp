@@ -20,13 +20,12 @@ public:
 
 	bool derivesFrom( const RTTI& r ) const
 	{
-
 		if ( this == &r )
 		{
 			return true;
 		}
 
-		for ( int i = static_cast<int>(parents.size()) - 1; i >= 0; --i )
+		for ( unsigned i = 0; i < parents.size(); ++i )
 		{
 			if ( parents[i]->derivesFrom( r ) )
 			{
