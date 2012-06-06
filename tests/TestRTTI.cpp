@@ -1,9 +1,6 @@
 #include <vector>
 #include <iostream>
-#include <typeinfo>
 #include <cassert>
-
-using namespace std;
 
 // interface to the RTTI (RunTime Type Information) of a class
 // Not to be created directly, use the RTTI_DECLARE/DEFINE macros below.
@@ -18,7 +15,6 @@ public:
 
 	const char* getClassName() const
 	{
-
 		return className;
 	}
 
@@ -27,7 +23,6 @@ public:
 
 		if ( this == &r )
 		{
-
 			return true;
 		}
 
@@ -36,7 +31,6 @@ public:
 
 			if ( parents[i]->derivesFrom( r ) )
 			{
-
 				return true;
 			}
 		}
@@ -46,7 +40,7 @@ public:
 
 private:
 	const char* className;
-	const vector<const RTTI*> parents;
+	const std::vector<const RTTI*> parents;
 };
 
 // generates parameters for the RTTI constructor by expanding a variadic template into an array
