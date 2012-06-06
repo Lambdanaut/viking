@@ -28,7 +28,6 @@ public:
 
 		for ( int i = static_cast<int>(parents.size()) - 1; i >= 0; --i )
 		{
-
 			if ( parents[i]->derivesFrom( r ) )
 			{
 				return true;
