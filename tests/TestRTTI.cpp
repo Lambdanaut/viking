@@ -75,7 +75,7 @@ public:
 		return newClass;
 	}
 
-	// lookup class definition from name or hashed name
+	// lookup class definition from hashed name
 	static const Class* findClass(const HashedString& hash)
 	{
 		std::map<HashedString, Class*>::const_iterator it = getSingleton().classTable.find(hash);
@@ -87,6 +87,8 @@ public:
 
 		return getSingleton().classTable[hash];
 	}
+
+	// lookup class definition from name
 	static const Class* findClass(const char* className)
 	{
 		return findClass(HashedString(className));
@@ -95,10 +97,12 @@ public:
 	// for debugging the RTTI system
 	static void debugPrint()
 	{
+		std::cout << "address : class name" << std::endl;
+
 		const std::map<HashedString, Class*>::const_iterator end = getSingleton().classTable.end();
 		for (std::map<HashedString, Class*>::iterator it = getSingleton().classTable.begin(); it != end; ++it)
 		{
-			std::cout << (*it).second << ": " << std::flush;
+			std::cout << (*it).second << " : " << std::flush;
 			std::cout << (*it).second->getName() << std::endl;
 		}
 	}
@@ -244,16 +248,16 @@ class UnitTest
 	// must be called AFTER the classful test to be valid
 	void reflectionTest()
 	{
-		// test getting existing class by name
+		// getting existing class by name
 		assert(Reflection::findClass("Sailboat") == &Sailboat::getClass());
 
-		// test getting nonexistant class by name
+		// getting nonexistant class by name
 		assert(Reflection::findClass("ASFJasdf") == 0);
 
-		// test getting existing class by hashed name
+		// getting existing class by hashed name
 		assert(Reflection::findClass(HashedString("Sailboat")) == &Sailboat::getClass());
 
-		// test getting nonexistant class by hashed name
+		// getting nonexistant class by hashed name
 		assert(Reflection::findClass(HashedString("ASFJasdf")) == 0);
 
 		// print all classes for sanity check

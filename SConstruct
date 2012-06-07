@@ -42,7 +42,7 @@ else:
 env = Environment()
 
 # add common compiler flags
-env.Append(CPPFLAGS = viking_flags['common'])
+env.Append(CXXFLAGS = viking_flags['common'])
 
 # add include directory
 env.Append(CPPPATH = path.abspath(viking_dirs['include']))
@@ -51,10 +51,10 @@ configuration_path = ''
 
 # conditionally add compiler flags
 if build_configuration == viking_dirs['debug']:
-	env.Append(CPPFLAGS = viking_flags['debug'])
+	env.Append(CXXFLAGS = viking_flags['debug'])
 	configuration_path = viking_dirs['debug']
 else:
-	env.Append(CPPFLAGS = viking_flags['release'])
+	env.Append(CXXFLAGS = viking_flags['release'])
 	configuration_path = viking_dirs['release']
 
 # compose path to build of Viking
