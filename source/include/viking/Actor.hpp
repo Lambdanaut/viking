@@ -3,6 +3,7 @@
 
 #include "viking/GameObject.hpp"
 #include "viking/ActorState.hpp"
+#include "viking/AnimatedSprite.hpp"
 #include <vector>
 
 namespace vik
@@ -34,6 +35,8 @@ private:
 
 	ActorState* currentState;
 	std::vector<ActorState*> states;
+
+	AnimatedSprite sprite;
 };
 
 } // end namespace vik

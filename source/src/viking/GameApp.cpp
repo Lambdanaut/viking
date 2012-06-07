@@ -4,6 +4,7 @@
 #include <irrlicht/irrlicht.h>
 #include "viking/IrrlichtEvent.hpp"
 #include <iostream>
+#include <sstream>
 
 using namespace irr;
 
@@ -17,8 +18,9 @@ device(0)
 {
 	initDevice();
 
-	const wchar_t* header = L"Viking prototype iteration 1";
-	getGUIEnvironment()->addStaticText(header, core::recti(0,0,100,100));
+	std::wstringstream ss;
+	ss << L"Viking alpha. built on " << __DATE__;
+	getGUIEnvironment()->addStaticText(ss.str().c_str(), core::recti(0,0,200,100));
 }
 
 GameApp::~GameApp()
@@ -91,7 +93,7 @@ void GameApp::initDevice()
 	// init camera 
 	scene::ICameraSceneNode* cam = getSceneManager()->addCameraSceneNode();
 	cam->setTarget(core::vector3df(0,0,0));
-	cam->setPosition(core::vector3df(0,0,50));
+	cam->setPosition(core::vector3df(0,0,200));
 }
 
 } // end namespace vik

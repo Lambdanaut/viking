@@ -8,7 +8,11 @@ namespace vik
 
 AnimatedSprite::AnimatedSprite()
 {
-	node = GameApp::getSceneManager()->addBillboardSceneNode();
+	video::ITexture* t = GameApp::getVideoDriver()->getTexture("../../../art/sketch1.png");
+	node = GameApp::getSceneManager()->addBillboardSceneNode(0, core::dimension2df(t->getSize()));
+	node->setMaterialFlag(video::EMF_LIGHTING, false);
+	node->setMaterialType(video::EMT_TRANSPARENT_ALPHA_CHANNEL_REF);
+	node->setMaterialTexture(0, t);
 }
 
 AnimatedSprite::~AnimatedSprite()
