@@ -1,8 +1,11 @@
 Developer: Nicolas
-	Quests:
+	Actor:
 	-Implement Actor input for Player derivative
 	-Implement Actor visuals
-	-Eventually consider splitting up the gameobjectengine's factorylist and objectlist into their own classes
+
+	RTTI:
+	-Find way to reflect functions/member functions for scripts
+	-Find way to construct concrete classes from Class objects
 	
 Future ideas:
 	Island survival theme
