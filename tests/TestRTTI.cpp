@@ -3,7 +3,7 @@
 #include <cassert>
 
 // interface to the RTTI (RunTime Type Information) of a class
-// Not to be created directly, use the RTTI_DECLARE/DEFINE macros below.
+// Not to be created directly, use the macro below.
 class RTTI
 {
 public:
@@ -36,20 +36,17 @@ public:
 		return false;
 	}
 
+	// creates an RTTI object for the given template parameters.
+	// future calls with the same template parameters will return a reference to the same object
+	template<class Derived, class... Parents>
+	static const RTTI& fromTemplate(const char* className)
+	{
+		static const RTTI r( className, { &Parents::getClass()... } );
+		return r;
+	}
 private:
 	const char* className;
 	const std::vector<const RTTI*> parents;
-};
-
-// generates parameters for the RTTI constructor by expanding a variadic template into an array
-template<class Derived, class... Parents>
-class RTTIInfo : public RTTI
-{
-public:
-	RTTIInfo( const char* className ):
-	RTTI( className, { &Parents::getClass()... } ) 
-	{
-	}
 };
 
 // declares necessary members for RTTI. To be used within the class declaration.
@@ -60,8 +57,7 @@ public:
 	} \
 	static const RTTI& getClass() \
 	{ \
-		static const RTTI typeInfo = RTTIInfo<ThisClass, ##Parents>(#ThisClass); \
-		return typeInfo; \
+		return RTTI::fromTemplate<ThisClass, ##Parents>(#ThisClass); \
 	} 
 
 // Unit tests
