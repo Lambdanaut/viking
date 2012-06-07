@@ -68,7 +68,7 @@ Files:
 
 If you are not sure about an element of naming conventions,
 Either look for something similar already done in the code base OR
-ask Nicolas so he can tell you he doesn't care as long as it's sensitive and consistent.
+consult Nicolas. Consistency is mostly important at the interface level.
 
 =================
 ------Builds-----
